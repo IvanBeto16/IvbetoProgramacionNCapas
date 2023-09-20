@@ -1,0 +1,141 @@
+﻿@model ML.Result
+@{
+    ViewBag.Title = "Cargar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Scripts.Render("~/bundles/jquery")
+}
+
+<h1 class="text-center">Carga de Archivos Masiva</h1>
+<br />
+<br />
+<div class="container">
+    <p>Seleccione el tipo de archivo a cargar en el sistema (Solo Usuarios)</p>
+    <hr />
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card bg-dark" style="width: 18rem;">
+                <img src="~/Content/Images/logoexcel.png" class="card-img-top" alt="logoExcel">
+                <div class="card-body bg-dark">
+                    <h5 class="card-title">Carga por Excel</h5>
+                    <p class="card-text">
+                        El archivo de Excel de extension 'xlsx' debe tener información únicamente de usuarios a insertar.
+                        Debe contener cada dato por celda, para poder leerlos bien, si hay datos nulos, se lo haremos saber.
+                    </p>
+                    <a><input type="submit" value="Subir Archivo" class="btn btn-success" id="xlsx" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card bg-dark" style="width: 18rem;">
+                <img src="~/Content/Images/logotxt.png" class="card-img-top" alt="logotxt">
+                <div class="card-body bg-dark">
+                    <h5 class="card-title">Carga por Archivo TXT</h5>
+                    <p class="card-text">
+                        El archivo de texto debe contener la cabezera de los datos separados con un Pipe ('|') para diferenciar
+                        los datos que contiene y saber cuando terminan los datos de un usuario e inicia el siguiente.
+                    </p>
+                    <a><input type="submit" value="Subir Archivo" class="btn btn-secondary" id="texto" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    @using (Html.BeginForm("Cargar", "CargaMasiva", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+
+        <div class="row g-3" style="display: none;" id="fuImage">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-file-excel" style="color: #075f0d;"></i></span>
+                    <input type="file" class="form-control" name="Excel" />
+                </div>
+            </div>
+
+            @if (Model.Correct)
+            {
+                <br />
+                <div class="row g-4">
+                    <div class="col-md-1">
+                        <a><input type="submit" class="btn btn-warning" value="Insertar" /></a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-1">
+                        <a><input type="submit" class="btn btn-warning" value="Validar" /> </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="row g-5" style="display: none;" id="txtImage">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-file-lines" style="color: #13175e;"></i></span>
+                    <input type="file" class="form-control" name="text" />
+                </div>
+            </div>
+            <div class="col-md-1">
+                <a><input type="submit" class="btn btn-warning" value="Insertar" /> </a>
+            </div>
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.Objects != null)
+        {
+            if (Model.Objects.Count() > 0)
+            {
+                <!--Tabla de errores de insersiones-->
+                <br />
+                <h5>Tabla de errores a corregir</h5>
+                <hr />
+                <table class="table table-responsive table-bordered table-danger table-striped">
+                    <thead>
+                        <tr>
+                            <th>IdRegistro</th>
+                            <th>Error Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ML.ErrorExcel error in Model.Objects)
+                        {
+                            <tr class="text-center">
+                                <td>@error.IdRegistro</td>
+                                <td>@error.Mensaje</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+        else
+        {
+            <br />
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Well done!</h4>
+                <p>El archivo subido al sistema ha sido validado de forma exitosa y no contiene errores</p>
+                <hr />
+                <p>Ahora ya puedes insertar dicha información al sistema</p>
+            </div>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $('#xlsx').click(function () {
+        $('#fuImage').toggle('slow', function () {
+        });
+    });
+
+    $('#texto').click(function () {
+        $('#txtImage').toggle('slow', function () {
+        });
+    });
+</script>
+
+

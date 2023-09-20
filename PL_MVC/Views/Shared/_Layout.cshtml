@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - CRUD ASP.NET</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/digislogo.png"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icon@1.10.5/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="~/Content/Styles/Home.css" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="color:white">
+    <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("CRUD ASP.NET", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Usuarios", "GetAll", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Seguros", "GetAllAseguradora", "Aseguradora", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Empleados", "GetAll", "Empleado", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Dependientes", "GetAllDependiente", "Dependiente", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+                <a class="d-flex btn btn-danger" href="@Url.Action("Login", "Usuario")">Cerrar Sesion</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div class="row">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="card bg-success text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuarios</h5>
+                        <p class="card-text">Puedes ver los usuarios que se encuentran en el sistema dando click abajo
+                        o bien, desde la barra de navegación, además de poder agregar más usuarios. Ten en cuenta que solo
+                        los usuarios registrados pueden ingresar al sistema</p>
+                        <a href="@Url.Action("GetAll","Usuario")" class="btn btn-primary">Go to Usuarios</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card bg-primary text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Aseguradoras</h5>
+                        <p class="card-text">Ciertos usuarios estan relacionados con Aseguradoras, por cualquier caso. 
+                        Para tener una aseguradora asignada, debes estar dado de alta en el sistema, después puedes agregar tu aseguradora
+                        y ver las que ya estan registradas dando click al botón o desde el navegador, en la opcion Seguros.</p>
+                        <a href="@Url.Action("GetAllAseguradora","Aseguradora")" class="btn btn-primary">Go to Seguros</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card bg-primary text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Dependientes y Empleados</h5>
+                        <p class="card-text">Los empleados dados de alta pueden tener o no tener dependientes asociados. Por lo que verás una presentacion de los empleados
+                        disponibles y una vista aparte dentro de cada empleado con la lista de sus dependientes asociados.</p>
+                        <a href="#" class="btn btn-primary">Go to Dependientes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

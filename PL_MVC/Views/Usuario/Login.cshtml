@@ -1,0 +1,135 @@
+﻿@model ML.Usuario
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Sistema CRUD - Digis01 x IvanBeto</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/digislogo.png" />
+    <link rel="stylesheet" href="~/Content/Styles/LoginStyle.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    @using (Html.BeginForm("Login", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <section>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span> <span></span> <span></span>
+            <span></span> <span></span>
+
+            <div class="signin">
+                <div class="content">
+                    <h2 style="text-align: center">
+                        <img src="~/Content/Images/digislogo.png" style="border-radius: 10px"/>
+                        <br />Bienvenido - Inicio Sesión
+                    </h2>
+                    <div class="form">
+                        <div class="inputBox">
+                            @Html.TextBoxFor(model => Model.Email, new { @name = "email", @type = "text", @placeholder = "Email" })
+                        </div>
+
+                        <div class="inputBox">
+                            @Html.TextBoxFor(model => Model.Password, new { @name = "password", @type = "password", @placeholder = "Password" })
+                        </div>
+
+                        <div class="links">
+                            <a href="#">Olvidaste tu contraseña?</a> <a href="@Url.Action("Form", "Usuario")">Registarme</a>
+                        </div>
+
+                        <div class="inputBox">
+                            <input type="submit" value="Login">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> <!-- partial -->
+     }
+    </body>
+</html>

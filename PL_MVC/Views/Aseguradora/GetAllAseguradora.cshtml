@@ -1,0 +1,43 @@
+﻿@model ML.Aseguradora
+@{
+    ViewBag.Title = "GetAllAseguradora";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetAllAseguradora</h2>
+<br />
+<hr />
+<h4>Aseguradoras existentes en el sistema</h4>
+<br />
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped">
+        <thead>
+            <th class="text-center align-middle">Editar</th>
+            <th class="text-center align-middle">Id Aseguradora</th>
+            <th class="text-center align-middle">Nombre</th>
+            <th class="text-center align-middle">Fecha de Creacion</th>
+            <th class="text-center align-middle">Ult. Fecha Modificacion</th>
+            <th class="text-center align-middle">Usuario Asignado</th>
+            <th class="text-center align-middle">Eliminar</th>
+        </thead>
+        <tbody>
+            @foreach(ML.Aseguradora aseguradora in Model.Aseguradoras)
+            {
+                <tr>
+                    <td><a class="align-items-center btn btn-primary" href="@Url.Action("FormAseguradora", "Aseguradora", new {IdAseguradora = aseguradora.IdAseguradora})"><i class="fa-solid fa-user-pen" style="color: #020536;"></i></a></td>
+                    <td class="text-center align-middle">@aseguradora.IdAseguradora</td>
+                    <td class="text-center align-middle">@aseguradora.Nombre</td>
+                    <td class="text-center align-middle">@aseguradora.FechaCreacion</td>
+                    <td class="text-center align-middle">@aseguradora.FechaModificacion</td>
+                    <td class="text-center align-middle">@aseguradora.Usuario.Nombre @aseguradora.Usuario.ApellidoPaterno</td>
+                    <td><a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar a esta compañia?')" href="@Url.Action("Delete", "Aseguradora", new {IdAseguradora = aseguradora.IdAseguradora})"><i class="fa-solid fa-user-xmark" style="color: #111722;"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<span>Para añadir una nueva compañía de seguros, pulse el siguiente botón: </span>
+<a class="btn btn-success" href="@Url.Action("FormAseguradora", "Aseguradora")"><i class="fa-solid fa-square-plus" style="color: #f0f2f4;"></i> Agregar Seguro</a>
+

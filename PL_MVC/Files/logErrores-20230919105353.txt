@@ -1,0 +1,2 @@
+Ha ocurrido un error con el usuario knightbraulio con nombre: BraulioRojasGarcia donde el error es: An error occurred while executing the command definition. See the inner exception for details.
+Ha ocurrido un error con el usuario mayra99 con nombre: MayraRuizCruz donde el error es: An error occurred while executing the command definition. See the inner exception for details.

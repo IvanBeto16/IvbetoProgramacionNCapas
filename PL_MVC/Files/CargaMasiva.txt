@@ -1,0 +1,7 @@
+Username|Nombre|ApellidoPaterno|ApellidoMaterno|FechaNacimiento|Email|Password|Telefono|Celular|Curp|Sexo|IdRol|Imagen|Calle|NumeroInterior|NumeroExterior|IdColonia
+izaaqLopez|Isaac|Lopez|Camela|isaaclopezc@gmail.com|1999-01-27|pass@word1|569869019|5577694729|LOCI990127HDRZLC01|M|3|null|Carlos Salinas|Mz.09|Lt.6|1
+eunicebarrera3|Eunice|Sanchez|Barrera|eunibarreras@hotmail.com|1999-07-10|pass@word1|567253428|5583921249|SABE990710MDFZRC07|F|4|null|Emilio Berliner|Mz.31|Lt.10|1
+agusbeto20|Eduardo Agustin|Beto|Bravo|agusbetobravo@hotmail.com|1993-07-20|pass@word1|5678903476|5578386352|BEBE930720HDRTVD07|M|4|null|Oxolotepec|No.80|Lt.6|2|
+selenevalera|Selene|Valera|Aguilar|selenevalagui@yahoo.com.mx|1994-10-19|pass@word1|768474234|5583920485|VAAS941019MCLRRN10|F|2|null|Moctezuma Xocotzin|No.5|Ext.6|4
+carlahumphrey|Carla|Humphrey|Luebbert|chumphreylue@gmail.com|1997-04-27|pass@word1|3656383490|4739372482|HULC970427MLNRTL04|F|4|null|Unabhängigkeit|No.3|Ext.9|14
+elrobertos|Roberto|Tellez|Saucedo|robertostezs@yahoo.com.mx|1999-06-16|pass@word1|5848391312|5590786948|TESR990616HDFZDT06|M|1|null|Duseldorf|No.90|801|20

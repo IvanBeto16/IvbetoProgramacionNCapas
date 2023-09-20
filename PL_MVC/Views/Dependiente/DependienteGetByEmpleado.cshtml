@@ -1,0 +1,56 @@
+﻿@model ML.Dependiente
+@{
+    ViewBag.Title = "DependienteGetByEmpleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dependientes de Empleado</h2>
+<br />
+<br />
+<a class="btn btn-success"><i class="fa-solid fa-user-plus" style="color: #f4f7fa;"></i> Agregar Dependiente</a>
+<br />
+<br />
+<h5>Se muestran los dependientes correspondientes al empleado: </h5>
+<br />
+@if (Model.Dependientes.Count > 0)
+{
+    <table class="table table-dark table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th>Editar Dependiente</th>
+                <th>No. Dependiente</th>
+                <th>Nombre del Dependiente</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Telefono</th>
+                <th>Estado Civil</th>
+                <th>Genero</th>
+                <th>Eliminar Dependiente</th>
+            </tr>
+        </thead>
+        @foreach (ML.Dependiente dependiente in Model.Dependientes)
+        {
+            <tbody>
+                <tr>
+                    <td><a class="btn btn-primary" href="@Url.Action("Form", "Dependiente", new { numeroEmpleado = dependiente.Empleado.NumeroEmpleado, idDependiente = dependiente.IdDependiente })"><i class="fa-solid fa-user-pen" style="color: #eff1f6;"></i></a></td>
+                    <td class="text-center">@dependiente.IdDependiente</td>
+                    <td class="text-center">@dependiente.Nombre @dependiente.ApellidoPaterno @dependiente.ApellidoMaterno</td>
+                    <td class="text-center">@dependiente.FechaNacimiento</td>
+                    <td class="text-center">@dependiente.Telefono</td>
+                    <td class="text-center">@dependiente.EstadoCivil</td>
+                    <td class="text-center">@dependiente.Genero</td>
+                    <td><a class="btn btn-danger" href="#"><i class="fa-solid fa-trash" style="color: #050467;"></i></a></td>
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+else
+{
+<div class="alert alert-warning d-flex align-items-center" role="alert">
+    <i class="fa-solid fa-triangle-exclamation" style="color: #1f1970;"></i>
+    <div>
+        <span>Este empleado no tiene dependientes asignados. Pulse el botón "Agregar Dependiente" para agregar el primero.</span>
+    </div>
+</div>
+}
+<a class="btn btn-danger" href="@Url.Action("GetAllDependiente", "Dependiente")"><i class="fa-solid fa-arrow-rotate-left" style="color: #f1f4f8;"></i> Volver a Empleados</a>

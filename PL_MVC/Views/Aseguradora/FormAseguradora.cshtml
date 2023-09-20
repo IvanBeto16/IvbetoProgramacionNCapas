@@ -1,0 +1,36 @@
+﻿@model ML.Aseguradora
+@{
+    ViewBag.Title = "FormAseguradora";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Registro de Aseguradora</h2>
+<hr />
+<br />
+<h4>Ingrese los datos de la Aseguradora Nueva</h4>
+<br />
+@using (Html.BeginForm("FormAseguradora", "Aseguradora", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => Model.IdAseguradora)
+    <div class="row row-cols-2 justify-content-md-center">
+        <div class="col-a-6">
+            @Html.LabelFor(model => Model.Nombre, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.Nombre, new { @class = "form-control hidden" })
+        </div>
+        <div class="col-a-6">
+            @Html.LabelFor(model => Model.FechaCreacion, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.FechaCreacion, new { @class = "form-control hidden" })
+        </div>
+    </div>
+    <div class="row row-cols-2 justify-content-md-center">
+        <div class="col-a-6">
+            @Html.LabelFor(model => Model.Usuario.IdUsuario, new { @class = "hidden" })
+            @Html.DropDownListFor(model => Model.Usuario.IdUsuario, new SelectList(Model.Usuario.Usuarios, "IdUsuario", "Nombre"), "Seleccione a su Usuario", new { @class = "form-control", @id = "ddlUsuario" })
+
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit"><i class="fa-solid fa-square-plus" style="color: #f0f2f4;"></i> Agregar Seguro</button>
+    <a class="btn btn-danger" href="@Url.Action("GetAllAseguradora", "Aseguradora")"><i class="fa-solid fa-circle-arrow-left" style="color: #f4f6fb;"></i> Volver</a>
+
+}
+

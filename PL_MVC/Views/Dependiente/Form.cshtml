@@ -1,0 +1,36 @@
+﻿@model ML.Dependiente
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Agregar o Actualizar Dependiente</h2>
+<br />
+<br />
+<span>Ingrese los datos del Dependiente a crear para este empleado</span>
+<hr />
+@using (Html.BeginForm("Form", "Dependiente", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="row row-cols-2">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => Model.Nombre)
+            @Html.TextBoxFor(model => Model.Nombre, new { @class = "form-control" })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(model => Model.ApellidoPaterno)
+            @Html.TextBoxFor(model => Model.ApellidoPaterno, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row row-cols-2">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => Model.ApellidoMaterno)
+            @Html.TextBoxFor(model => Model.ApellidoMaterno, new { @class = "form-control" })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(model => Model.FechaNacimiento)
+            @Html.TextBoxFor(model => Model.FechaNacimiento, new { @class = "form-control" })
+        </div>
+    </div>
+}
+
+<a class="btn btn-danger" href="@Url.Action("DependienteGetByEmpleado", "Dependiente", new { numeroEmpleado = Model.Empleado.NumeroEmpleado })"><i class="fa-solid fa-arrow-rotate-left" style="color: #f1f4f8;"></i> Volver a Empleados</a>

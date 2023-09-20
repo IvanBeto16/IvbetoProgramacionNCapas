@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ab59268a27048b9a5b8fa2641283584" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Rol" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Colonia" Width="1.5" PointX="12.125" PointY="1.125" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Direccion" Width="1.5" PointX="14.375" PointY="1.625" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Estado" Width="1.5" PointX="7.625" PointY="1.25" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Municipio" Width="1.5" PointX="9.875" PointY="1.25" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Pai" Width="1.5" PointX="5.375" PointY="1.375" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__Colonia__IdMunic__534D60F1" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__Direccion__IdCol__5629CD9C" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__ESTADO__IdPais__4D94879B" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__Municipio__IdEst__5070F446" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Aseguradora" Width="1.5" PointX="7.5" PointY="4.125" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Usuario" Width="1.5" PointX="2.875" PointY="1" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__Asegurado__IdUsu__6FE99F9F" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__Direccion__IdUsu__571DF1D5" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__Usuario__IdRol__29572725" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Empleado" Width="1.5" PointX="5.375" PointY="6.875" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Empresa" Width="1.5" PointX="1.625" PointY="7.875" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__Empleado__IdEmpr__7F2BE32F" />
+        <EntityTypeShape EntityType="IvbetoProgramacionNCapasModel.Dependiente" Width="1.5" PointX="8.5" PointY="7.125" />
+        <AssociationConnector Association="IvbetoProgramacionNCapasModel.FK__Dependien__Numer__160F4887" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

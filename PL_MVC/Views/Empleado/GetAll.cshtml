@@ -1,0 +1,81 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="text-center">Empleados Disponibles</h1>
+<br />
+<hr />
+<span>Para agregar más empleados al sistema</span> <br />
+<a class="btn btn-success" href="@Url.Action("Form","Empleado")"><i class="bi bi-person-fill-add"></i> Agregar Empleado</a>
+<br />
+<br />
+@using (Html.BeginForm("GetAll", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-4">
+            @Html.Label("Busca por la Empresa Asociada")
+            @Html.DropDownListFor(model => model.Empresa.IdEmpresa, new SelectList(Model.Empresa.Empresas, "IdEmpresa", "Nombre"), "Seleccione la Empresa", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.Label("Busca por el Nombre del Empleado")
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Busque por Nombre" })
+        </div>
+        <div class="col-lg-4">
+            <br />
+            <button class="btn btn-primary" href="#">Buscar</button>
+        </div>
+    </div>
+}
+<br />
+<hr />
+<h5>Lista de empleados que se encuentran asociados con una empresa de Tecnología</h5>
+<br />
+@if (Model.Empleados != null)
+{
+    <table class="table table-responsive table-bordered table-dark table-striped-columns">
+        <thead>
+            <tr>
+                <th class="text-center align-middle">Editar Usuario</th>
+                <th class="text-center align-middle">IdUsuario</th>
+                <th class="text-center align-middle">Foto de Empleado</th>
+                <th class="text-center align-middle">R.F.C</th>
+                <th class="text-center align-middle">Nombre del Empleado</th>
+                <th class="text-center align-middle">Fecha de Nacimiento</th>
+                <th class="text-center align-middle">Correo Electrónico</th>
+                <th class="text-center align-middle">Fecha de Ingreso a Empresa</th>
+                <th class="text-center align-middle">Telefono de Contacto</th>
+                <th class="text-center align-middle">Empresa Asociada</th>
+                <th class="text-center align-middle">Eliminar Usuario</th>
+            </tr>
+        </thead>
+        @foreach (ML.Empleado empleado in Model.Empleados)
+        {
+            <tbody>
+                <tr>
+                    <td><a class="align-items-center btn btn-primary" href="@Url.Action("Form","Empleado", new { numeroEmpleado = empleado.NumeroEmpleado })"><i class="fa-solid fa-pen-to-square" style="color: #010f28;"></i></a></td>
+                    <td>@empleado.NumeroEmpleado</td>
+                    @if (empleado.Foto == null || empleado.Foto == "")
+                    {
+                        <td><img src="~/Content/Images/empleadoGenerico.png" width="50" height="65" class="rounded-circle align-content-center" /></td>
+                    }
+                    else
+                    {
+                        <td><img src="data:image/*;base64,@empleado.Foto" width="53" height="65" class="rounded-circle align-content-center" /></td>
+                    }
+                    <td>@empleado.RFC</td>
+                    <td>@empleado.Nombre @empleado.ApellidoPaterno @empleado.ApellidoMaterno</td>
+                    <td>@empleado.FechaNacimiento</td>
+                    <td>@empleado.Email</td>
+                    <td>@empleado.FechaIngreso</td>
+                    <td>@empleado.NSS</td>
+                    <td>@empleado.Empresa.Nombre</td>
+                    <td><a class="btn btn-danger" onclick="return confirm('Seguro de eliminar a este empleado?')" href="#"><i class="fa-solid fa-user-slash" style="color: #e9ecf1;"></i></a> </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+<br />
+<br />
+<a class="btn btn-danger" href="@Url.Action("Index", "Home")"><i class="fa-solid fa-circle-arrow-left" style="color: #f4f6fb;"></i> Volver al Inicio</a>

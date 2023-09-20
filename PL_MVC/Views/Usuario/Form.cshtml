@@ -1,0 +1,436 @@
+﻿@model ML.Usuario
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Scripts.Render("~/bundles/jquery")
+}
+
+<h1 class="text-center">Registro de Nuevo Usuario</h1>
+<hr />
+<h5>Ingrese los datos del nuevo usuario</h5>
+
+@using (Html.BeginForm("Form", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => Model.IdUsuario)
+    @Html.HiddenFor(model => Model.Imagen)
+    <div class="row row-cols-3">
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.UserName, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.UserName, new { @class = "form-control text-primary-emphasis bg-primary-subtle border border-primary-subtle", @id = "formUserName", @style = "color= white;" })
+            <label id="lblUsername"></label>
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Nombre, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.Nombre, new { @class = "form-control hidden", @id = "formNombre", @onkeypress = "return OnlyLetters(event,'lblNombre','formNombre')" })
+            @Html.ValidationMessageFor(model => Model.Nombre)
+            <label id="lblNombre"></label>
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.ApellidoPaterno, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.ApellidoPaterno, new { @class = "form-control hidden", @id = "formApellidoPaterno", @onkeypress = "return OnlyLetters(event,'lblApellidoPaterno','formApellidoPaterno')" })
+            @Html.ValidationMessageFor(model => Model.ApellidoPaterno)
+            <label id="lblApellidoPaterno"></label>
+        </div>
+    </div>
+    <hr />
+
+    <hr />
+    <div class="row row-cols-3">
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.ApellidoMaterno, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.ApellidoMaterno, new { @class = "form-control hidden", @id = "formApellidoMaterno", @onkeypress = "return OnlyLetters(event,'lblApellidoMaterno','formApellidoMaterno')" })
+            <label id="lblApellidoMaterno"></label>
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.FechaNacimiento, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.FechaNacimiento, new { @class = "form-control hidden", @placeholder = "YYYY/MM/DD", @id = "formBirthday" })
+            @Html.ValidationMessageFor(model => Model.FechaNacimiento)
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Email, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.Email, new { @class = "form-control hideen", @placeholder = "ejemplo@correo.com", @id = "formEmail" })
+            @Html.ValidationMessageFor(model => Model.Email)
+            <label id="lblEmail"></label>
+            <br />
+            <br />
+            @Html.Label("Confirme su Correo Electronico")
+            <input class="form-control" type="text" placeholder="Confirme su correo electronico" id="confirmEmail" />
+            <br />
+        </div>
+    </div>
+    <hr />
+    <div class="row row-cols-3">
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Password, new { @class = "hidden" })
+            @Html.PasswordFor(model => Model.Password, new { @class = "form-control hidden", @id = "formPassword", @onchange = "return ValidatePassword()" })
+            @Html.ValidationMessageFor(model => Model.Password)
+            <label id="lblPassword"></label>
+            <br />
+            <br />
+            @Html.Label("Confirme su Contraseña")
+            <input class="form-control" type="password" placeholder="Confirme su contraseña" id="confirmPwd" />
+            <label id="lblconfirm"></label>
+            <br />
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Telefono, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.Telefono, new { @class = "form-control hidden", @id = "formTelefono", @onkeypress = "return OnlyNumbers(event,'lblTelefono','formTelefono')" })
+            @Html.ValidationMessageFor(model => Model.Telefono)
+            <label id="lblTelefono"></label>
+        </div>
+        <div class="col-a-4" onmouseover="">
+            @Html.LabelFor(model => Model.Celular, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.Celular, new { @class = "form-control hidden", @id = "formCelular", @onkeypress = "return OnlyNumbers(event,'lblCelular','formCelular')" })
+            @Html.ValidationMessageFor(model => Model.Celular)
+            <label id="lblCelular"></label>
+        </div>
+    </div>
+    <hr />
+
+    <div class="row row-cols-3">
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Curp, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.Curp, new { @class = "form-control hidden", @id = "formCurp" })
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Sexo, new { @class = "hidden" })
+            <br />
+            @Html.RadioButtonFor(model => Model.Sexo, "M") @Html.Label("-> Masculino")
+            <br />
+            @Html.RadioButtonFor(model => Model.Sexo, "F") @Html.Label("-> Femenino")
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Rol.IdRol, new { @class = "hidden" })
+            @Html.DropDownListFor(model => Model.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Selecciona el Rol deseado", new { @class = "form-control", @id = "forRol" })
+        </div>
+    </div>
+    <hr />
+    <h5>Foto de Perfil del Usuario</h5>
+    <div class="row row-cols-3">
+        <div class="col-a-4">
+            @if (Model.Imagen == "" || Model.Imagen == null)
+            {
+
+                <img src="https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg" id="imagenUsuario" width="150" height="200" />
+                <input id="Imagen" name="Imagen" type="file" class="form-control" onchange="ValidaImagen(), VerImagen(this)" />
+            }
+            else
+            {
+                <img src="data:image/*;base64,@Model.Imagen" id="imagenUsuario" width="150" height="200" />
+                <input id="Imagen" name="Imagen" type="file" class="form-control" onchange="ValidaImagen(), VerImagen(this)" />
+            }
+        </div>
+    </div>
+    <br />
+    <hr />
+    <h3>Direccion del Usuario</h3>
+    <br />
+    <div class="row row-cols-3">
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Direccion.Calle)
+            @Html.TextBoxFor(mode => Model.Direccion.Calle, new { @class = "form-control", @id = "formCalle" })
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Direccion.NumeroInterior)
+            @Html.TextBoxFor(model => Model.Direccion.NumeroInterior, new { @class = "form-control", @id = "formNumInterior" })
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Direccion.NumeroExterior)
+            @Html.TextBoxFor(model => Model.Direccion.NumeroExterior, new { @class = "form-control", @id = "formNumExterior" })
+        </div>
+    </div>
+    <hr />
+    <div class="row row-cols-3">
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Direccion.Colonia.Municipio.Estado.IdEstado)
+            @if (Model.Direccion.Colonia.Municipio.Estado.IdEstado == null)
+            {
+                @Html.DropDownListFor(model => Model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(String.Empty), "Seleccione su Estado", new { @class = "form-control", @id = "ddlEstado" })
+            }
+            else
+            {
+                @Html.DropDownListFor(model => Model.Direccion.Colonia.Municipio.Estado.IdEstado, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Estados, "IdEstado", "Nombre"), "Seleccione su Estado", new { @class = "form-control", @id = "ddlEstado" })
+            }
+
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Direccion.Colonia.Municipio.IdMunicipio)
+            @if (Model.Direccion.Colonia.Municipio.IdMunicipio == null)
+            {
+                @Html.DropDownListFor(model => Model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(String.Empty), "Seleccione su Municipio/Distrito", new { @class = "form-control", @id = "ddlMunicipio" })
+            }
+            else
+            {
+                @Html.DropDownListFor(model => Model.Direccion.Colonia.Municipio.IdMunicipio, new SelectList(Model.Direccion.Colonia.Municipio.Municipios, "IdMunicipio", "Nombre"), "Seleccione su Municipio/Distrito", new { @class = "form-control", @id = "ddlMunicipio" })
+            }
+        </div>
+        <div class="col-a-4">
+            @Html.LabelFor(model => Model.Direccion.Colonia.IdColonia)
+            @if (Model.Direccion.Colonia.IdColonia == null)
+            {
+                @Html.DropDownListFor(model => Model.Direccion.Colonia.IdColonia, new SelectList(String.Empty), "Seleccione su Colonia/Barrio", new { @class = "form-control", @id = "ddlColonia" })
+            }
+            else
+            {
+                @Html.DropDownListFor(model => Model.Direccion.Colonia.IdColonia, new SelectList(Model.Direccion.Colonia.Colonias, "IdColonia", "Nombre"), "Seleccione su Colonia/Barrio", new { @class = "form-control", @id = "ddlColonia" })
+            }
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col">
+            @Html.LabelFor(model => Model.Direccion.Colonia.Municipio.Estado.Pais.IdPais)
+            @Html.DropDownListFor(model => Model.Direccion.Colonia.Municipio.Estado.Pais.IdPais, new SelectList(Model.Direccion.Colonia.Municipio.Estado.Pais.Paises, "IdPais", "Nombre"), "Seleccione el Pais correspondiente", new { @class = "form-control", @id = "ddlPais" })
+        </div>
+    </div>
+
+    <br />
+    <hr />
+    <button class="btn btn-success" type="submit"><i class="fa-solid fa-user-plus" style="color: #ebedef;" id="buttonAdd"></i> Agregar</button>
+    <a class="btn btn-danger" href="@Url.Action("GetAll", "Usuario")"><i class="fa-solid fa-arrow-left" style="color: #eceff4;"></i> Regresar</a>
+}
+
+<script type="text/javascript">
+
+    //Funciones de validaciones para los textbox
+    function OnlyNumbers(e, lbl, frm) {
+        var codigo = e.keyCode;
+        if ((codigo > 47 && codigo < 58)) {
+            $("#" + lbl).text("")
+            $("#" + frm).css('border-color', 'green')
+            return true;
+        } else {
+            $("#" + lbl).text("Solo se admiten números")
+            $("#" + frm).css('border-color', 'red')
+            $("#" + lbl).css('color', 'red')
+            return false;
+        }
+    }
+
+    function OnlyLetters(e, lbl, frm) {
+        var charCode = e.keyCode;
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 8) {
+            $("#" + frm).css('border-color', 'green')
+            $('#' + lbl).text("")
+            return true;
+        }
+        else {
+            $("#" + lbl).text("Solo se admiten letras")
+            $("#" + frm).css('border-color', 'red')
+            $("#" + lbl).css('color', 'red')
+            return false;
+        }
+    }
+    
+    /*function ValidatePassword() {
+        var pwd = document.getElementById("formPassword").value;
+        var conf = document.getElementById("confirmPwd").value;
+        if (pwd == '') {
+            $("#lblPassword").text("Por favor ingrese una contraseña")
+        }
+        if (conf == '') {
+            $("#lblconfirm").text("Confirme su contraseña")
+        }
+        if (pwd == conf) {
+            $("#formPassword").css('border-color', 'green')
+            $("#confirmPwd").css('border-color', 'green')
+            return true;
+        }
+        else {
+            $("#formPassword").css('border-color', 'red')
+            $("#confirmPwd").css('border-color', 'red')
+            $("#lblconfirm").text("Las contraseñas no coinciden, intentelo de nuevo")
+            return false;
+        }
+        */
+
+        //Funciones para el cambio de valores de los dropdownlist
+        $("#ddlPais").change(function () {
+            $("#ddlEstado").empty();
+            $.ajax({
+                url: "http://localhost:54739/Usuario/EstadoGetByIdPais", //direccion donde se hará la peticion
+                type: "GET", //Verbo del controlador
+                dataType: "json",
+                data: { IdPais: $("#ddlPais").val() },
+                success: function (result) {
+                    $("#ddlEstado").append('<option value=0>' + 'Selecciona una opcion' + '</option>');
+                    $.each(result, function (i, result) {
+                        $("#ddlEstado").append('<option value="' + result.IdEstado + '">' + result.Nombre + '</option>');
+                    });
+                },
+                error: function (error) {
+                    alert('Ocurrio un error al consultar los estados del pais');
+                }
+            });
+
+        });
+
+        $("#ddlEstado").change(function () {
+            $("#ddlMunicipio").empty();
+            $.ajax({
+                url: "http://localhost:54739/Usuario/MunicipioGetByIdEstado", //direccion donde se hará la peticion
+                type: "GET", //Verbo del controlador
+                dataType: "json",
+                data: { IdEstado: $("#ddlEstado").val() },
+                success: function (result) {
+                    $("#ddlMunicipio").append('<option value=0>' + 'Selecciona una opcion' + '</option>');
+                    $.each(result, function (i, result) {
+                        $("#ddlMunicipio").append('<option value="' + result.IdMunicipio + '">' + result.Nombre + '</option>');
+                    });
+                },
+                error: function (error) {
+                    alert('Ocurrio un error al consultar los estados del pais');
+                }
+            });
+
+        });
+
+        $("#ddlMunicipio").change(function () {
+            $("#ddlColonia").empty();
+            $.ajax({
+                url: "http://localhost:54739/Usuario/ColoniaGetByIdMunicipio", //direccion donde se hará la peticion
+                type: "GET", //Verbo del controlador
+                dataType: "json",
+                data: { IdMunicipio: $("#ddlMunicipio").val() },
+                success: function (result) {
+                    $("#ddlColonia").append('<option value=0>' + 'Selecciona una opcion' + '</option>');
+                    $.each(result, function (i, result) {
+                        $("#ddlColonia").append('<option value="' + result.IdColonia + '">' + result.Nombre + '</option>');
+                    });
+                },
+                error: function (error) {
+                    alert('Ocurrio un error al consultar los estados del pais');
+                }
+            });
+
+        });
+
+        $("#formCelular").mouseover(function () {
+            $("#formCelular").css("background-color", " #4a235a ");
+            $("#formCelular").css("color", "#07F507");
+        });
+        $("#formCelular").mouseout(function () {
+            $("#formCelular").css("background-color", "white");
+            $("#formCelular").css("color", "black");
+        });
+        //----------------------------------------------------------------------------
+        $("#formUserName").mouseover(function () {
+            $("#formUserName").css("background-color", " #4a235a ");
+            $("#formUserName").css("color", "#07F507");
+        });
+        $("#formUserName").mouseout(function () {
+            $("#formUserName").css("background-color", "white");
+            $("#formUserName").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formNombre").mouseover(function () {
+            $("#formNombre").css("background-color", " #4a235a ");
+            $("#formNombre").css("color", "#07F507");
+        });
+        $("#formNombre").mouseout(function () {
+            $("#formNombre").css("background-color", "white");
+            $("#formNombre").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formApellidoPaterno").mouseover(function () {
+            $("#formApellidoPaterno").css("background-color", " #4a235a ");
+            $("#formApellidoPaterno").css("color", "#07F507");
+        });
+        $("#formApellidoPaterno").mouseout(function () {
+            $("#formApellidoPaterno").css("background-color", "white");
+            $("#formApellidoPaterno").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formApellidoMaterno").mouseover(function () {
+            $("#formApellidoMaterno").css("background-color", " #4a235a ");
+            $("#formApellidoMaterno").css("color", "#07F507");
+        });
+        $("#formApellidoMaterno").mouseout(function () {
+            $("#formApellidoMaterno").css("background-color", "white");
+            $("#formApellidoMaterno").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formBirthday").mouseover(function () {
+            $("#formBirthday").css("background-color", " #4a235a ");
+            $("#formBirthday").css("color", "#07F507");
+        });
+        $("#formBirthday").mouseout(function () {
+            $("#formBirthday").css("background-color", "white");
+            $("#formBirthday").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formEmail").mouseover(function () {
+            $("#formEmail").css("background-color", " #4a235a ");
+            $("#formEmail").css("color", "#07F507");
+        });
+        $("#formEmail").mouseout(function () {
+            $("#formEmail").css("background-color", "white");
+            $("#formEmail").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formPassword").mouseover(function () {
+            $("#formPassword").css("background-color", " #4a235a ");
+            $("#formPassword").css("color", "#07F507");
+        });
+        $("#formPassword").mouseout(function () {
+            $("#formPassword").css("background-color", "white");
+            $("#formPassword").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formCurp").mouseover(function () {
+            $("#formCurp").css("background-color", " #4a235a ");
+            $("#formCurp").css("color", "#07F507");
+        });
+        $("#formCurp").mouseout(function () {
+            $("#formCurp").css("background-color", "white");
+            $("#formCurp").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formSexo").mouseover(function () {
+            $("#formSexo").css("background-color", " #4a235a ");
+            $("#formSexo").css("color", "#07F507");
+        });
+        $("#formSexo").mouseout(function () {
+            $("#formSexo").css("background-color", "white");
+            $("#formSexo").css("color", "black");
+        });
+        //-----------------------------------------------------------------------------
+        $("#formTelefono").mouseover(function () {
+            $("#formTelefono").css("background-color", " #4a235a ");
+            $("#formTelefono").css("color", "#07F507");
+        });
+        $("#formTelefono").mouseout(function () {
+            $("#formTelefono").css("background-color", "white");
+            $("#formTelefono").css("color", "black");
+        });
+
+        function ValidaImagen() {
+            var extensionesPermitidas = ['jpeg', 'jpg', 'png'];
+            var extensionArchivo = document.getElementById('Imagen').value.split('.').pop().toLowerCase();
+            var isValidFile = false; //saber si es valida o no es valida
+            for (var index in extensionesPermitidas) {
+                if (extensionArchivo === extensionesPermitidas[index]) {
+                    isValidFile = true;
+                    break;
+                }
+            }
+            if (!isValidFile) {
+                alert('Las extensiones permitidas son : *.' + extensionesPermitidas.join(', *.'));
+                $("#Imagen").val("")
+            }
+            return isValidFile;
+        }
+
+        function VerImagen(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagenUsuario').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+</script>
+

@@ -1,0 +1,57 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "GetAllDependiente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Empleados en Activo</h2>
+<br />
+<br />
+<p>Información importante y detallada acerca de los empleados disponibles en el sistema y sus dependientes</p>
+<hr />
+@using (Html.BeginForm("GetAllDependiente", "Dependiente", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    if (Model.Empleados != null)
+    {
+        <div class="container d-md-grid">
+            <div class="row row-cols-3">
+                @foreach (ML.Empleado empleado in Model.Empleados)
+                {
+                    <div class="col-md-4">
+                        <div class="card bg-dark" style="width: 18rem;">
+                            @if (empleado.Foto == null || empleado.Foto == "")
+                            {
+                                <img src="~/Content/Images/empleadoGenerico.png" class="card-img-top rounded-circle" height="300" width="350" alt="..." />
+                            }
+                            else
+                            { 
+                                <img src="data:image/*;base64,@empleado.Foto" class="card-img-top rounded-circle" height="300" width="350" alt="...">
+                            }
+                            <div class="card-body bg-primary">
+                                <h5 class="card-title">@empleado.Nombre @empleado.ApellidoPaterno @empleado.ApellidoMaterno</h5>
+                                <br />
+                                <span class="card-text">Fecha de Nacimiento: @empleado.FechaNacimiento</span>
+                                <br />
+                                <span class="card-text">Correo: @empleado.Email</span>
+                                <br />
+                                <span class="card-text">Empresa asociada: @empleado.Empresa.Nombre</span>
+                                <br />
+                                <span class="card-text">Fecha de Ingreso a la Empresa: @empleado.FechaIngreso</span>
+                                <br />
+                                <span class="card-text">@empleado.Telefono</span>
+                                <br />
+                                <br />
+                                <a href="@Url.Action("DependienteGetByEmpleado", "Dependiente", new { numeroEmpleado = empleado.NumeroEmpleado })" class="btn btn-warning">Dependientes</a>
+                            </div>
+                        </div>
+                        <br />
+                        <hr />
+                        <br />
+                    </div>
+                 }
+                </div>
+        </div>
+    }
+}
+
+

@@ -1,0 +1,119 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Scripts.Render("~/bundles/jquery")
+}
+
+<h2 class="text-center">Registo (Actualizacion) de Empleados</h2>
+<br />
+<h5>Ingrese los datos del Empleado</h5>
+@using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => Model.Foto)
+    @Html.HiddenFor(model => Model.Accion)
+    <div class="row row-cols-3">
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.NumeroEmpleado, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.NumeroEmpleado, new { @class = "form-control", @id = "formNumEmp" })
+        </div>
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.Nombre, new { @class = "hidden" })
+            @Html.TextBoxFor(model => Model.Nombre, new { @class = "form-control", @id = "formNombre" })
+        </div>
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.ApellidoPaterno)
+            @Html.TextBoxFor(model => Model.ApellidoPaterno, new { @class = "form-control", @id = "formApellidoPat" })
+        </div>
+    </div>
+    <hr />
+    <div class="row row-cols-3">
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.ApellidoMaterno)
+            @Html.TextBoxFor(model => Model.ApellidoMaterno, new { @class = "form-control", @id = "formApellidoMat" })
+        </div>
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.FechaNacimiento)
+            @Html.TextBoxFor(model => Model.FechaNacimiento, new { @class = "form-control", @id = "formFechaNacimiento" })
+        </div>
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.RFC)
+            @Html.TextBoxFor(model => Model.RFC, new { @class = "form-control", @id = "formRFC" })
+        </div>
+    </div>
+    <hr />
+    <div class="row row-cols-3">
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.Email)
+            @Html.TextBoxFor(model => Model.Email, new { @class = "form-control", @id = "formEmail" })
+        </div>
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.Telefono)
+            @Html.TextBoxFor(model => Model.Telefono, new { @class = "form-control", @id = "formTelefono" })
+        </div>
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.NSS)
+            @Html.TextBoxFor(model => Model.NSS, new { @class = "form-control", @id = "formSeguroSocial" })
+        </div>
+    </div>
+    <hr />
+    <div class="row row-cols-3">
+        <div class="col-lg-4">
+            <h4 class="text-center">Foto de Perfil del Empleado</h4>
+            @if (Model.Foto == null || Model.Foto == "")
+            {
+
+
+                <img src="~/Content/Images/empleadoGenerico.png" id="imagenEmpleado" alt=fotoperfil width="200" height="200" />
+                <input type="file" id="imagen" name="imagen" class="form-control" onchange="ValidaImagen(), VerImagen(this)" />
+            }
+            else
+            {
+                <img src="data:image/*;base64,@Model.Foto" id="imagenEmpleado" alt="fotoperfil" width="200" height="200" />
+                <input type="file" id="imagen" name="imagen" class="form-control" onchange="ValidaImagen(), VerImagen(this)" />
+            }
+        </div>
+        <div class="col-lg-4">
+            @Html.LabelFor(model => Model.Empresa.IdEmpresa)
+            @Html.DropDownListFor(model => Model.Empresa.IdEmpresa, new SelectList(Model.Empresa.Empresas, "IdEmpresa", "Nombre"), "Seleccione su empresa", new { @class = "form-control" })
+        </div>
+        <div class="col-lg-4">
+            <div class="spinner-border text-success" style="width:5rem; height:5rem" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <button class="btn btn-success" type="submit"><i class="fa-solid fa-user-plus" style="color: #ebedef;" id="buttonAdd"></i> Agregar</button>
+    <a class="btn btn-danger" href="@Url.Action("GetAll", "Empleado")"> Regresar</a>
+}
+
+<script>
+    function ValidaImagen() {
+        var extensionesPermitidas = ['jpeg', 'jpg', 'png'];
+        var extensionArchivo = document.getElementById('imagen').value.split('.').pop().toLowerCase();
+        var isValidFile = false; //saber si es valida o no es valida
+        for (var index in extensionesPermitidas) {
+            if (extensionArchivo === extensionesPermitidas[index]) {
+                isValidFile = true;
+                break;
+            }
+        }
+        if (!isValidFile) {
+            alert('Las extensiones permitidas son : *.' + extensionesPermitidas.join(', *.'));
+            $("#imagen").val("")
+        }
+        return isValidFile;
+    }
+
+    function VerImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagenEmpleado').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
