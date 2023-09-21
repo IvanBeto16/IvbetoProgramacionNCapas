@@ -478,6 +478,15 @@ namespace DLEF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmpleadoGetAll_Result>("EmpleadoGetAll", idEmpresaParameter, nombreEmpleadoParameter);
         }
     
+        public virtual int DependienteDelete(Nullable<int> idDependiente, ObjectParameter filasEliminadas)
+        {
+            var idDependienteParameter = idDependiente.HasValue ?
+                new ObjectParameter("IdDependiente", idDependiente) :
+                new ObjectParameter("IdDependiente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DependienteDelete", idDependienteParameter, filasEliminadas);
+        }
+    
         public virtual int DependienteAdd(string numeroEmpleado, string nombre, string apellidoPaterno, string apellidoMaterno, Nullable<System.DateTime> fechaNacimiento, string estadoCivil, string genero, string telefono, string rFC, ObjectParameter filasInsertadas)
         {
             var numeroEmpleadoParameter = numeroEmpleado != null ?
@@ -517,20 +526,6 @@ namespace DLEF
                 new ObjectParameter("RFC", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DependienteAdd", numeroEmpleadoParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, estadoCivilParameter, generoParameter, telefonoParameter, rFCParameter, filasInsertadas);
-        }
-    
-        public virtual int DependienteDelete(Nullable<int> idDependiente, ObjectParameter filasEliminadas)
-        {
-            var idDependienteParameter = idDependiente.HasValue ?
-                new ObjectParameter("IdDependiente", idDependiente) :
-                new ObjectParameter("IdDependiente", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DependienteDelete", idDependienteParameter, filasEliminadas);
-        }
-    
-        public virtual ObjectResult<DependienteGetAll_Result> DependienteGetAll()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DependienteGetAll_Result>("DependienteGetAll");
         }
     
         public virtual int DependienteUpdate(Nullable<int> idDependiente, string nombre, string apellidoPaterno, string apellidoMaterno, Nullable<System.DateTime> fechaNacimiento, string estadoCivil, string genero, string telefono, string rFC, ObjectParameter filasAlteradas)
@@ -574,13 +569,9 @@ namespace DLEF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DependienteUpdate", idDependienteParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, estadoCivilParameter, generoParameter, telefonoParameter, rFCParameter, filasAlteradas);
         }
     
-        public virtual ObjectResult<DependienteGetByIdEmpleado_Result> DependienteGetByIdEmpleado(string numeroEmpleado)
+        public virtual ObjectResult<DependienteGetAll_Result> DependienteGetAll()
         {
-            var numeroEmpleadoParameter = numeroEmpleado != null ?
-                new ObjectParameter("NumeroEmpleado", numeroEmpleado) :
-                new ObjectParameter("NumeroEmpleado", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DependienteGetByIdEmpleado_Result>("DependienteGetByIdEmpleado", numeroEmpleadoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DependienteGetAll_Result>("DependienteGetAll");
         }
     
         public virtual ObjectResult<DependienteGetById_Result> DependienteGetById(Nullable<int> idDependiente)
@@ -590,6 +581,15 @@ namespace DLEF
                 new ObjectParameter("IdDependiente", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DependienteGetById_Result>("DependienteGetById", idDependienteParameter);
+        }
+    
+        public virtual ObjectResult<DependienteGetByIdEmpleado_Result> DependienteGetByIdEmpleado(string numeroEmpleado)
+        {
+            var numeroEmpleadoParameter = numeroEmpleado != null ?
+                new ObjectParameter("NumeroEmpleado", numeroEmpleado) :
+                new ObjectParameter("NumeroEmpleado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DependienteGetByIdEmpleado_Result>("DependienteGetByIdEmpleado", numeroEmpleadoParameter);
         }
     }
 }

@@ -40,6 +40,7 @@ namespace BL
                         aux.Telefono = item.Telefono;
                         aux.Genero = item.Genero;
                         aux.EstadoCivil = item.EstadoCivil;
+                        aux.RFC = item.RFC;
                         aux.Empleado.NumeroEmpleado = item.NumeroEmpleado;
                         aux.Empleado.Nombre = item.NombreEmpleado;
                         aux.Empleado.ApellidoPaterno = item.ApellidoPaternoEmpleado;
@@ -84,6 +85,7 @@ namespace BL
                         auxiliar.FechaNacimiento = Convert.ToDateTime(item.FechaNacimiento);
                         auxiliar.Telefono = item.Telefono;
                         auxiliar.EstadoCivil = item.EstadoCivil;
+                        auxiliar.RFC = item.RFC;
                         auxiliar.Genero = item.Genero;
                         auxiliar.Empleado.NumeroEmpleado = item.NumeroEmpleado;
                         auxiliar.Empleado.Nombre = item.NombreEmpleado;
@@ -108,12 +110,13 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using(IvbetoProgramacionNCapasEntities context = new IvbetoProgramacionNCapasEntities())
+                using (IvbetoProgramacionNCapasEntities context = new IvbetoProgramacionNCapasEntities())
                 {
                     ObjectParameter filasInsertadas = new ObjectParameter("filasInsertadas", typeof(int));
-                    var query = context.DependienteAdd(dependiente.Nombre, dependiente.ApellidoPaterno, dependiente.ApellidoMaterno,
-                        dependiente.EstadoCivil, dependiente.FechaNacimiento, dependiente.Genero, dependiente.Telefono,
-                        dependiente.RFC, dependiente.Empleado.NumeroEmpleado, filasInsertadas);
+                    var query = context.DependienteAdd(dependiente.Empleado.NumeroEmpleado, dependiente.Nombre,
+                        dependiente.ApellidoPaterno, dependiente.ApellidoMaterno, dependiente.FechaNacimiento,
+                        dependiente.EstadoCivil, dependiente.Genero, dependiente.Telefono,
+                        dependiente.RFC, filasInsertadas);
                     if((int)filasInsertadas.Value > 0)
                     {
                         result.Correct = true;

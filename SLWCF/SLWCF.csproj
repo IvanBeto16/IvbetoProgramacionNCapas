@@ -71,6 +71,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AseguradoraService.svc" />
     <Content Include="EmpleadoService.svc" />
     <Content Include="OperationService.svc" />
     <Content Include="Service1.svc" />
@@ -78,9 +79,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AseguradoraService.svc.cs">
+      <DependentUpon>AseguradoraService.svc</DependentUpon>
+    </Compile>
     <Compile Include="EmpleadoService.svc.cs">
       <DependentUpon>EmpleadoService.svc</DependentUpon>
     </Compile>
+    <Compile Include="IAseguradoraService.cs" />
     <Compile Include="IEmpleadoService.cs" />
     <Compile Include="IOperationService.cs" />
     <Compile Include="IUsuarioService.cs" />

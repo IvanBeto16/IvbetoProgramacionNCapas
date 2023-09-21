@@ -102,7 +102,7 @@ namespace PL_MVC.Controllers
         [HttpPost]
         public ActionResult Form(ML.Dependiente dependiente)
         {
-            if(dependiente.Accion == "Add") //hora de comida volvemos
+            if(dependiente.Accion == "Add") 
             {
                 //Add
                 ML.Result result = BL.Dependiente.AddEF(dependiente);
@@ -113,7 +113,7 @@ namespace PL_MVC.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Error al insertar el dependiente nuevo";
+                    ViewBag.Message = "Error al insertar el dependiente nuevo" + result.ErrorMessage;
                     ViewBag.numEmpleado = dependiente.Empleado.NumeroEmpleado;
                     return PartialView("Modal");
                 }
@@ -129,7 +129,7 @@ namespace PL_MVC.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "Error al actualizar el dependiente nuevo";
+                    ViewBag.Message = "Error al actualizar el dependiente nuevo" + result.ErrorMessage ;
                     ViewBag.numEmpleado = dependiente.Empleado.NumeroEmpleado;
                     return PartialView("Modal");
                 }
@@ -137,25 +137,18 @@ namespace PL_MVC.Controllers
         }
 
         // GET: Dependiente/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int idDependiente)
         {
-            return View();
-        }
-
-        // POST: Dependiente/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            ML.Result result = BL.Dependiente.DeleteEF(idDependiente);
+            if (result.Correct)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                ViewBag.Message = "Se ha eliminado correctamente al dependiente";
             }
-            catch
+            else
             {
-                return View();
+                ViewBag.Message = "No se ha podido eliminar al dependiente. Ha ocurrido un error" + result.ErrorMessage;
             }
+            return PartialView("Modal");
         }
     }
 }

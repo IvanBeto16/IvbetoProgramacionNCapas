@@ -21,6 +21,7 @@ namespace DLEF
         public string EstadoCivil { get; set; }
         public string Genero { get; set; }
         public string Telefono { get; set; }
+        public string RFC { get; set; }
         public string NumeroEmpleado { get; set; }
         public string NombreEmpleado { get; set; }
         public string ApellidoPaternoEmpleado { get; set; }

@@ -13,11 +13,16 @@ namespace PL_MVC.Controllers
         [HttpGet]
         public ActionResult GetAllAseguradora()
         {
-            ML.Result result = BL.Aseguradora.GetAllEF();
+            //Llamada al metodo sin servicios web
+            //ML.Result result = BL.Aseguradora.GetAllEF();
+
+            //Usaremos el Servicio web para llamar al metodo
+            ServiceReferenceAseguradora.AseguradoraServiceClient service = new ServiceReferenceAseguradora.AseguradoraServiceClient();
+            var result = service.GetAll();
             ML.Aseguradora seguro = new ML.Aseguradora();
             if (result.Correct)
             {
-                seguro.Aseguradoras = result.Objects;
+                seguro.Aseguradoras = result.Objects.ToList();
             }
             else
             {
@@ -60,7 +65,13 @@ namespace PL_MVC.Controllers
         {
             if(aseguradora.IdAseguradora == 0) //Add
             {
-                ML.Result result = BL.Aseguradora.AddEF(aseguradora);
+                //LLamada al metodo de Add sin servicios web
+                //ML.Result result = BL.Aseguradora.AddEF(aseguradora);
+
+                //Llamada al metodo de Add con servicios web
+                ServiceReferenceAseguradora.AseguradoraServiceClient service = new ServiceReferenceAseguradora.AseguradoraServiceClient();
+                var result = service.Add(aseguradora);
+
                 if (result.Correct)
                 {
                     ViewBag.Message = "Se ha agregado correctamente la entidad";
@@ -72,7 +83,12 @@ namespace PL_MVC.Controllers
             }
             else   //Update
             {
-                ML.Result result = BL.Aseguradora.UpdateEF(aseguradora);
+                //Llamada al metodo de Update sin servicios web
+                //ML.Result result = BL.Aseguradora.UpdateEF(aseguradora);
+
+                //Llamada al metodo de Update con servicios web
+                ServiceReferenceAseguradora.AseguradoraServiceClient service = new ServiceReferenceAseguradora.AseguradoraServiceClient();
+                var result = service.Update(aseguradora);
                 if (result.Correct)
                 {
                     ViewBag.Message = "Se ha actualizado correctamente la entidad";
@@ -85,48 +101,15 @@ namespace PL_MVC.Controllers
             return PartialView("Modal");
         }
 
-        // POST: Aseguradora/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Aseguradora/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Aseguradora/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Aseguradora/Delete/5
         public ActionResult Delete(int IdAseguradora)
         {
-            ML.Result result = BL.Aseguradora.DeleteEF(IdAseguradora);
+            //Llamada al metodo de Delete sin servicios web
+            //ML.Result result = BL.Aseguradora.DeleteEF(IdAseguradora);
+
+            //Llamada al metodo de Delete con servicios web
+            ServiceReferenceAseguradora.AseguradoraServiceClient service = new ServiceReferenceAseguradora.AseguradoraServiceClient();
+            var result = service.Delete(IdAseguradora);
             if (result.Correct)
             {
                 ViewBag.Message = "Se ha eliminado el Seguro exitosamente";

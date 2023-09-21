@@ -105,8 +105,8 @@ namespace BL
                 using (IvbetoProgramacionNCapasEntities context = new IvbetoProgramacionNCapasEntities())
                 {
                     ObjectParameter filasInsertadas = new ObjectParameter("filasInsertadas", typeof(int));
-                    var query = context.EmpleadoAdd(empleado.NumeroEmpleado, empleado.Nombre, empleado.ApellidoPaterno,
-                        empleado.ApellidoMaterno, empleado.Email, empleado.Telefono, empleado.RFC,
+                    var query = context.EmpleadoAdd(empleado.NumeroEmpleado, empleado.RFC, empleado.Nombre, empleado.ApellidoPaterno,
+                        empleado.ApellidoMaterno, empleado.Email, empleado.Telefono,
                         empleado.FechaNacimiento, empleado.NSS, empleado.Foto
                         , empleado.Empresa.IdEmpresa, filasInsertadas);
 

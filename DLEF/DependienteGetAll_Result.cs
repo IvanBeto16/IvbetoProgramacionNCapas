@@ -19,6 +19,7 @@ namespace DLEF
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public string EstadoCivil { get; set; }
         public string Genero { get; set; }
+        public string RFC { get; set; }
         public string Telefono { get; set; }
         public string NumeroEmpleado { get; set; }
         public string Nombre1 { get; set; }

@@ -11,6 +11,8 @@
 <hr />
 @using (Html.BeginForm("Form", "Dependiente", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
+    @Html.HiddenFor(model => Model.Empleado.NumeroEmpleado)
+    @Html.HiddenFor(model => Model.Accion)
     <div class="row row-cols-2">
         <div class="col-lg-6">
             @Html.LabelFor(model => Model.Nombre)
@@ -64,9 +66,12 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body bg-info">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                            <h5 class="card-title">Agregar o Actualizar Dependientes</h5>
+                            <p class="card-text">
+                                Los dependientes son personas que estan afiliadas a un empleado del sistema, un empleado puede tener muchos dependientes, pero
+                                un dependiente solo puede estar afiliado a un empleado.
+                            </p>
+                            <p class="card-text"><small class="text-body-secondary">Recuerda llenar todos los campos para el registro o actualizacion</small></p>
                         </div>
                     </div>
                 </div>
@@ -74,7 +79,7 @@
         </div>
     </div>
     <br />
-    
+
     <br />
     <br />
     <button class="btn btn-success" type="submit"><i class="fa-solid fa-user-plus" style="color: #f4f7fa;"></i> Agregar Dependiente</button>

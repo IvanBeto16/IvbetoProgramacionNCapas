@@ -641,6 +641,10 @@
             <End Role="Empleado" EntitySet="Empleadoes" />
             <End Role="Dependiente" EntitySet="Dependientes" />
           </AssociationSet>
+          <FunctionImport Name="DependienteDelete">
+            <Parameter Name="IdDependiente" Mode="In" Type="Int32" />
+            <Parameter Name="FilasEliminadas" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="DependienteAdd">
             <Parameter Name="NumeroEmpleado" Mode="In" Type="String" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -653,11 +657,6 @@
             <Parameter Name="RFC" Mode="In" Type="String" />
             <Parameter Name="FilasInsertadas" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="DependienteDelete">
-            <Parameter Name="IdDependiente" Mode="In" Type="Int32" />
-            <Parameter Name="FilasEliminadas" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="DependienteGetAll" ReturnType="Collection(IvbetoProgramacionNCapasModel.DependienteGetAll_Result)" />
           <FunctionImport Name="DependienteUpdate">
             <Parameter Name="IdDependiente" Mode="In" Type="Int32" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -670,11 +669,12 @@
             <Parameter Name="RFC" Mode="In" Type="String" />
             <Parameter Name="filasAlteradas" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="DependienteGetByIdEmpleado" ReturnType="Collection(IvbetoProgramacionNCapasModel.DependienteGetByIdEmpleado_Result)">
-          <Parameter Name="NumeroEmpleado" Mode="In" Type="String" />
-          </FunctionImport>
+          <FunctionImport Name="DependienteGetAll" ReturnType="Collection(IvbetoProgramacionNCapasModel.DependienteGetAll_Result)" />
           <FunctionImport Name="DependienteGetById" ReturnType="Collection(IvbetoProgramacionNCapasModel.DependienteGetById_Result)">
             <Parameter Name="IdDependiente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DependienteGetByIdEmpleado" ReturnType="Collection(IvbetoProgramacionNCapasModel.DependienteGetByIdEmpleado_Result)">
+            <Parameter Name="NumeroEmpleado" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="RolGetAll_Result">
@@ -1064,25 +1064,12 @@
           <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
           <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Genero" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Telefono" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="NumeroEmpleado" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Nombre1" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ApellidoPaterno1" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ApellidoMaterno1" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="DependienteGetByIdEmpleado_Result">
-          <Property Type="Int32" Name="IdDependiente" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
-          <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Genero" Nullable="false" MaxLength="2" />
-          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="NumeroEmpleado" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="NombreEmpleado" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ApellidoPaternoEmpleado" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ApellidoMaternoEmpleado" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="DependienteGetById_Result">
           <Property Type="Int32" Name="IdDependiente" Nullable="false" />
@@ -1091,6 +1078,22 @@
           <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
           <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NumeroEmpleado" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreEmpleado" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaternoEmpleado" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaternoEmpleado" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="DependienteGetByIdEmpleado_Result">
+          <Property Type="Int32" Name="IdDependiente" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="EstadoCivil" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RFC" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Genero" Nullable="false" MaxLength="2" />
           <Property Type="String" Name="Telefono" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="NumeroEmpleado" Nullable="false" MaxLength="50" />
@@ -1439,8 +1442,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="DependienteAdd" FunctionName="IvbetoProgramacionNCapasModel.Store.DependienteAdd" />
           <FunctionImportMapping FunctionImportName="DependienteDelete" FunctionName="IvbetoProgramacionNCapasModel.Store.DependienteDelete" />
+          <FunctionImportMapping FunctionImportName="DependienteAdd" FunctionName="IvbetoProgramacionNCapasModel.Store.DependienteAdd" />
+          <FunctionImportMapping FunctionImportName="DependienteUpdate" FunctionName="IvbetoProgramacionNCapasModel.Store.DependienteUpdate" />
           <FunctionImportMapping FunctionImportName="DependienteGetAll" FunctionName="IvbetoProgramacionNCapasModel.Store.DependienteGetAll">
             <ResultMapping>
               <ComplexTypeMapping TypeName="IvbetoProgramacionNCapasModel.DependienteGetAll_Result">
@@ -1450,30 +1454,12 @@
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
                 <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
                 <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="NumeroEmpleado" ColumnName="NumeroEmpleado" />
                 <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
                 <ScalarProperty Name="ApellidoPaterno1" ColumnName="ApellidoPaterno1" />
                 <ScalarProperty Name="ApellidoMaterno1" ColumnName="ApellidoMaterno1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="DependienteUpdate" FunctionName="IvbetoProgramacionNCapasModel.Store.DependienteUpdate" />
-          <FunctionImportMapping FunctionImportName="DependienteGetByIdEmpleado" FunctionName="IvbetoProgramacionNCapasModel.Store.DependienteGetByIdEmpleado">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="IvbetoProgramacionNCapasModel.DependienteGetByIdEmpleado_Result">
-                <ScalarProperty Name="IdDependiente" ColumnName="IdDependiente" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
-                <ScalarProperty Name="Genero" ColumnName="Genero" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="NumeroEmpleado" ColumnName="NumeroEmpleado" />
-                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
-                <ScalarProperty Name="ApellidoPaternoEmpleado" ColumnName="ApellidoPaternoEmpleado" />
-                <ScalarProperty Name="ApellidoMaternoEmpleado" ColumnName="ApellidoMaternoEmpleado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1486,6 +1472,26 @@
                 <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
                 <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="NumeroEmpleado" ColumnName="NumeroEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="ApellidoPaternoEmpleado" ColumnName="ApellidoPaternoEmpleado" />
+                <ScalarProperty Name="ApellidoMaternoEmpleado" ColumnName="ApellidoMaternoEmpleado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DependienteGetByIdEmpleado" FunctionName="IvbetoProgramacionNCapasModel.Store.DependienteGetByIdEmpleado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IvbetoProgramacionNCapasModel.DependienteGetByIdEmpleado_Result">
+                <ScalarProperty Name="IdDependiente" ColumnName="IdDependiente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="EstadoCivil" ColumnName="EstadoCivil" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
                 <ScalarProperty Name="Genero" ColumnName="Genero" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="NumeroEmpleado" ColumnName="NumeroEmpleado" />

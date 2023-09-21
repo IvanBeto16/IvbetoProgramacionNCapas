@@ -7,8 +7,8 @@ using System.Web;
 namespace SLWCF
 {
     [DataContract]
-    [KnownType(typeof(ML.Empleado))]
-    [KnownType(typeof(ML.Usuario))]
+    //[KnownType(typeof(ML.Empleado))]
+    //[KnownType(typeof(ML.Aseguradora))]
     public class Result
     {
         [DataMember]

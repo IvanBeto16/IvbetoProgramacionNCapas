@@ -48,6 +48,7 @@ namespace SLWCF
 
         public SLWCF.Result GetAll(ML.Empleado empleado)
         {
+            empleado.Empresa = new ML.Empresa();
             empleado.Nombre = "";
             empleado.Empresa.IdEmpresa = 0;
             ML.Result result = BL.Empleado.GetAllEF(empleado);

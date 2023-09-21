@@ -18,8 +18,10 @@ namespace SLWCF
         [OperationContract]
         SLWCF.Result Delete(string numeroEmpleado);
         [OperationContract]
+        [ServiceKnownType(typeof(ML.Empleado))]
         SLWCF.Result GetAll(ML.Empleado empleado);
         [OperationContract]
+        [ServiceKnownType(typeof(ML.Empleado))]
         SLWCF.Result GetById(string numeroEmpleado);
     }
 }
