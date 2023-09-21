@@ -74,6 +74,7 @@ namespace PL_MVC.Controllers
                 ML.Result result = BL.Empleado.GetByIdEF(numeroEmpleado);
                 if (result.Correct)
                 {
+                    //unboxing
                     empleado = (ML.Empleado)result.Object;
                     empleado.Empresa.Empresas = resultEmpresa.Objects;
                     empleado.Accion = "Update";

@@ -7,7 +7,7 @@
 <h2>Dependientes de Empleado</h2>
 <br />
 <br />
-<a class="btn btn-success"><i class="fa-solid fa-user-plus" style="color: #f4f7fa;"></i> Agregar Dependiente</a>
+<a class="btn btn-success" href="@Url.Action("Form", "Dependiente", new { numeroEmpleado = Model.Empleado.NumeroEmpleado, idDependiente = Model.IdDependiente })"><i class="fa-solid fa-user-plus" style="color: #f4f7fa;"></i> Agregar Dependiente</a>
 <br />
 <br />
 <h5>Se muestran los dependientes correspondientes al empleado: </h5>
@@ -24,6 +24,7 @@
                 <th>Telefono</th>
                 <th>Estado Civil</th>
                 <th>Genero</th>
+                <th>RFC</th>
                 <th>Eliminar Dependiente</th>
             </tr>
         </thead>
@@ -38,6 +39,7 @@
                     <td class="text-center">@dependiente.Telefono</td>
                     <td class="text-center">@dependiente.EstadoCivil</td>
                     <td class="text-center">@dependiente.Genero</td>
+                    <td class="text-center">@dependiente.RFC</td>
                     <td><a class="btn btn-danger" href="#"><i class="fa-solid fa-trash" style="color: #050467;"></i></a></td>
                 </tr>
             </tbody>

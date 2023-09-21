@@ -13,12 +13,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body border-dark">
                 <h3>@ViewBag.Message</h3>
             </div>
             <div class="modal-footer">
                 @*@Html.ActionLink("Regresar", "GetAll", "Materia", htmlAttributes: new { @class = "btn btn-danger" })*@
-                @Html.ActionLink("Vale", "DependienteGetByIdEmpleado", "Dependiente", htmlAttributes: new { @class = "btn btn-danger" })
+                @Html.ActionLink("Vale", "DependienteGetByEmpleado", "Dependiente", htmlAttributes: new { @class = "btn btn-danger", numEmpleado = ViewBag.numEmpleado })
 
 
             </div>

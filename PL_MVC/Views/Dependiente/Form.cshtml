@@ -41,7 +41,42 @@
             @Html.TextBoxFor(model => Model.Telefono, new { @class = "form-control" })
         </div>
     </div>
+    <br />
+    <br />
+    <div class="row row-cols-3">
+        <div class="col-lg-5">
+            @Html.LabelFor(model => Model.RFC)
+            @Html.TextBoxFor(model => Model.RFC, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-3">
+            @Html.LabelFor(model => Model.Genero)
+            <br />
+            @Html.RadioButtonFor(model => Model.Genero, "M") @Html.Label("-> Masculino")
+            <br />
+            @Html.RadioButtonFor(model => Model.Genero, "F") @Html.Label("-> Feminino")
+            <br />
+        </div>
+        <div class="col-lg-4">
+            <div class="card mb-3 d-flex" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4 bg-primary">
+                        <img src="~/Content/Images/addusuer.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body bg-info">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    
+    <br />
+    <br />
+    <button class="btn btn-success" type="submit"><i class="fa-solid fa-user-plus" style="color: #f4f7fa;"></i> Agregar Dependiente</button>
+    <a class="btn btn-danger" href="@Url.Action("DependienteGetByEmpleado", "Dependiente", new { numeroEmpleado = Model.Empleado.NumeroEmpleado })"><i class="fa-solid fa-arrow-rotate-left" style="color: #f1f4f8;"></i> Volver a Empleados</a>
 }
-<br />
-<br />
-<a class="btn btn-danger" href="@Url.Action("DependienteGetByEmpleado", "Dependiente", new { numeroEmpleado = Model.Empleado.NumeroEmpleado })"><i class="fa-solid fa-arrow-rotate-left" style="color: #f1f4f8;"></i> Volver a Empleados</a>

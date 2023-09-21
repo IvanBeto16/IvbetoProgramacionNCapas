@@ -83,11 +83,16 @@ namespace PL_MVC.Controllers
             dependiente.Empleado = new ML.Empleado();
             dependiente.Empleado.NumeroEmpleado = numeroEmpleado;
 
-            if(idDependiente != null)
+            if(idDependiente == 0) //Add
+            {
+                dependiente.Accion = "Add";
+            }
+            else  //Update
             {
                 //Unboxing
                 ML.Result resultDependientes = BL.Dependiente.GetById(idDependiente.Value);
-                dependiente = (ML.Dependiente)resultDependientes.Object;
+                dependiente = (ML.Dependiente)resultDependientes.Object; //Excepcion de casteo al insertar
+                dependiente.Accion = "Update";
             }
 
             return View(dependiente);
@@ -97,17 +102,19 @@ namespace PL_MVC.Controllers
         [HttpPost]
         public ActionResult Form(ML.Dependiente dependiente)
         {
-            if(dependiente.IdDependiente == 0)
+            if(dependiente.Accion == "Add") //hora de comida volvemos
             {
                 //Add
                 ML.Result result = BL.Dependiente.AddEF(dependiente);
                 if (result.Correct)
                 {
-                    return RedirectToAction("DependienteGetByIdEmpleado", "Dependiente", new { dependiente.Empleado.NumeroEmpleado });
+                    ViewBag.numEmpleado = dependiente.Empleado.NumeroEmpleado;
+                    return RedirectToAction("DependienteGetByEmpleado", "Dependiente", new { dependiente.Empleado.NumeroEmpleado });
                 }
                 else
                 {
                     ViewBag.Message = "Error al insertar el dependiente nuevo";
+                    ViewBag.numEmpleado = dependiente.Empleado.NumeroEmpleado;
                     return PartialView("Modal");
                 }
             }
@@ -117,11 +124,13 @@ namespace PL_MVC.Controllers
                 ML.Result result = BL.Dependiente.UpdateEF(dependiente);
                 if (result.Correct)
                 {
-                    return RedirectToAction("DependienteGetByIdEmpleado", "Dependiente", new { dependiente.Empleado.NumeroEmpleado });
+                    ViewBag.numEmpleado = dependiente.Empleado.NumeroEmpleado;
+                    return RedirectToAction("DependienteGetByEmpleado", "Dependiente", new { dependiente.Empleado.NumeroEmpleado });
                 }
                 else
                 {
                     ViewBag.Message = "Error al actualizar el dependiente nuevo";
+                    ViewBag.numEmpleado = dependiente.Empleado.NumeroEmpleado;
                     return PartialView("Modal");
                 }
             }
