@@ -3,10 +3,17 @@
     ViewBag.Title = "GetAll";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+@Scripts.Render("~/bundles/jquery")
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+
 <h1 class="text-center">Empleados Disponibles</h1>
 <br />
 <hr />
-<span>Para agregar más empleados al sistema</span> <br />
+<span>Para agregar más empleados al sistema</span>
+<br />
 <a class="btn btn-success" href="@Url.Action("Form","Empleado")"><i class="bi bi-person-fill-add"></i> Agregar Empleado</a>
 <br />
 <br />
@@ -33,7 +40,7 @@
 <br />
 @if (Model.Empleados != null)
 {
-    <table class="table table-responsive table-bordered table-dark table-striped-columns">
+    <table class="table table-responsive table-bordered table-dark table-striped-columns" id="myTable">
         <thead>
             <tr>
                 <th class="text-center align-middle">Editar Usuario</th>
@@ -68,7 +75,7 @@
                     <td>@empleado.FechaNacimiento</td>
                     <td>@empleado.Email</td>
                     <td>@empleado.FechaIngreso</td>
-                    <td>@empleado.NSS</td>
+                    <td>@empleado.Telefono</td>
                     <td>@empleado.Empresa.Nombre</td>
                     <td><a class="btn btn-danger" onclick="return confirm('Seguro de eliminar a este empleado?')" href="#"><i class="fa-solid fa-user-slash" style="color: #e9ecf1;"></i></a> </td>
                 </tr>
@@ -79,3 +86,4 @@
 <br />
 <br />
 <a class="btn btn-danger" href="@Url.Action("Index", "Home")"><i class="fa-solid fa-circle-arrow-left" style="color: #f4f6fb;"></i> Volver al Inicio</a>
+
