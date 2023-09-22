@@ -7,9 +7,10 @@ using System.Web.Http;
 
 namespace SLWebApi.Controllers
 {
+    [RoutePrefix("api/aseguradora")]
     public class AseguradoraController : ApiController
     {
-        [Route("api/aseguradora/add")]
+        [Route("")]
         [HttpPost]
         public IHttpActionResult Add(ML.Aseguradora aseguradora)
         {
@@ -24,9 +25,9 @@ namespace SLWebApi.Controllers
             }
         }
 
-        [Route("api/aseguradora/update")]
-        [HttpPost]
-        public IHttpActionResult Update(ML.Aseguradora Aseguradora)
+        [Route("/{idAseguradora}")]
+        [HttpPut]
+        public IHttpActionResult Update(int idAseguradora, [FromBody]ML.Aseguradora Aseguradora)
         {
             ML.Result result = BL.Aseguradora.UpdateEF(Aseguradora);
             if (result.Correct)
@@ -39,8 +40,8 @@ namespace SLWebApi.Controllers
             }
         }
 
-        [Route("api/aseguradora/delete")]
-        [HttpPost]
+        [Route("/{idAseguradora}")]
+        [HttpDelete]
         public IHttpActionResult Delete(int idAseguradora)
         {
             ML.Result result = BL.Aseguradora.DeleteEF(idAseguradora);

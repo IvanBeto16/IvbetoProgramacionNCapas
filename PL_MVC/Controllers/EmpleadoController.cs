@@ -18,11 +18,18 @@ namespace PL_MVC.Controllers
 
             empleado.Empresa.IdEmpresa = 0;
             empleado.Nombre = "";
-            ML.Result result = BL.Empleado.GetAllEF(empleado);
+
+            //Llamada al metodo sin servicios SOAP
+            //ML.Result result = BL.Empleado.GetAllEF(empleado);
+
+            //Llamada al metodo son servicios SOAP
+            ServiceReferenceEmpleado.EmpleadoServiceClient service = new ServiceReferenceEmpleado.EmpleadoServiceClient();
+            var result = service.GetAll(empleado);
+
             ML.Result resultEmpresas = BL.Empresa.GetAll();
             if (result.Correct)
             {
-                empleado.Empleados = result.Objects;
+                empleado.Empleados = result.Objects.ToList();
                 empleado.Empresa.Empresas = resultEmpresas.Objects;
             }
             else
@@ -39,13 +46,20 @@ namespace PL_MVC.Controllers
             {
                 empleado.Nombre = "";
             }
-            ML.Result result = BL.Empleado.GetAllEF(empleado);
+
+            //Llamada al metodo sin servicios
+            //ML.Result result = BL.Empleado.GetAllEF(empleado);
+
+            //Llamada al metodo con servicios SOAP
+            ServiceReferenceEmpleado.EmpleadoServiceClient service = new ServiceReferenceEmpleado.EmpleadoServiceClient();
+            var result = service.GetAll(empleado);
+
             ML.Result resultEmpresas = BL.Empresa.GetAll();
             empleado = new ML.Empleado();
             empleado.Empresa = new ML.Empresa();
             if (result.Correct)
             {
-                empleado.Empleados = result.Objects;
+                empleado.Empleados = result.Objects.ToList();
                 empleado.Empresa.Empresas = resultEmpresas.Objects;
             }
             else
@@ -71,7 +85,12 @@ namespace PL_MVC.Controllers
             }
             else   //Update
             {
-                ML.Result result = BL.Empleado.GetByIdEF(numeroEmpleado);
+                //Llamada al metodo sin servicios SOAP
+                //ML.Result result = BL.Empleado.GetByIdEF(numeroEmpleado);
+
+                //Llamada al metodo con servicios SOAP
+                ServiceReferenceEmpleado.EmpleadoServiceClient service = new ServiceReferenceEmpleado.EmpleadoServiceClient();
+                var result = service.GetById(numeroEmpleado);
                 if (result.Correct)
                 {
                     //unboxing
@@ -95,7 +114,12 @@ namespace PL_MVC.Controllers
                 }
                 if (empleado.Accion == "Add") //Add
                 {
-                    ML.Result result = BL.Empleado.AddEF(empleado);
+                    //Llamada al metodo sin servicios SOAP
+                    //ML.Result result = BL.Empleado.AddEF(empleado);
+
+                    //Llamada al metodo con servicios SOAP
+                    ServiceReferenceEmpleado.EmpleadoServiceClient service = new ServiceReferenceEmpleado.EmpleadoServiceClient();
+                    var result = service.Add(empleado);
                     if (result.Correct)
                     {
                         ViewBag.Message = "Se ha agregado un nuevo empleado exitosamente";
@@ -107,7 +131,12 @@ namespace PL_MVC.Controllers
                 }
                 else  //Update
                 {
-                    ML.Result result = BL.Empleado.UpdateEF(empleado);
+                    //Llamada al metodo sin servicios SOAP
+                    //ML.Result result = BL.Empleado.UpdateEF(empleado);
+
+                    //Llamada al metodo con servicios SOAP
+                    ServiceReferenceEmpleado.EmpleadoServiceClient service = new ServiceReferenceEmpleado.EmpleadoServiceClient();
+                    var result = service.Update(empleado);
                     if (result.Correct)
                     {
                         ViewBag.Message = "Se ha actualizado al empleado exitosamente";
@@ -138,10 +167,14 @@ namespace PL_MVC.Controllers
             return imagen;
         }
 
-        public ActionResult Delete(int IdUsuario)
+        public ActionResult Delete(string numeroEmpleado)
         {
+            //Llamada al metodo sin servicios SOAP
+            //ML.Result result = BL.Usuario.DeleteEF(IdUsuario);
 
-            ML.Result result = BL.Usuario.DeleteEF(IdUsuario);
+            //Llamada al metodo con servicios SOAP
+            ServiceReferenceEmpleado.EmpleadoServiceClient service = new ServiceReferenceEmpleado.EmpleadoServiceClient();
+            var result = service.Delete(numeroEmpleado);
             if (result.Correct)
             {
                 ViewBag.Message = "Se ha eliminado correctamente al usuario";
