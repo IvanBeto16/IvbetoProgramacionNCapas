@@ -25,7 +25,7 @@ namespace SLWebApi.Controllers
             }
         }
 
-        [Route("{idAseguradora}")]
+        [Route("/{idAseguradora}")]
         [HttpPut]
         public IHttpActionResult Update(int idAseguradora, [FromBody]ML.Aseguradora Aseguradora)
         {
@@ -40,44 +40,12 @@ namespace SLWebApi.Controllers
             }
         }
 
-        [Route("{idAseguradora}")]
+        [Route("/{idAseguradora}")]
         [HttpDelete]
         public IHttpActionResult Delete(int idAseguradora)
         {
             ML.Result result = BL.Aseguradora.DeleteEF(idAseguradora);
             if (result.Correct)
-            {
-                return Content(HttpStatusCode.OK, result);
-            }
-            else
-            {
-                return Content(HttpStatusCode.BadRequest, result);
-            }
-        }
-
-        [Route("")]
-        [HttpGet]
-        public IHttpActionResult GetAll()
-        {
-            ML.Result result = BL.Aseguradora.GetAllEF();
-            if(result.Correct)
-            {
-                return Content(HttpStatusCode.OK, result);
-            }
-            else
-            {
-                return Content(HttpStatusCode.BadRequest, result);
-            }
-        }
-
-        [Route("{idAseguradora}")]
-        [HttpGet]
-        public IHttpActionResult GetById(int idAseguradora)
-        {
-            ML.Aseguradora seguro = new ML.Aseguradora();
-            seguro.IdAseguradora = idAseguradora;
-            ML.Result result = BL.Aseguradora.GetByIdEF(seguro.IdAseguradora);
-            if(result.Correct)
             {
                 return Content(HttpStatusCode.OK, result);
             }
