@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Routing;
 
 namespace SLWebApi.Controllers
 {
@@ -45,6 +46,39 @@ namespace SLWebApi.Controllers
         public IHttpActionResult Delete(int idAseguradora)
         {
             ML.Result result = BL.Aseguradora.DeleteEF(idAseguradora);
+            if (result.Correct)
+            {
+                return Content(HttpStatusCode.OK, result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
+
+        [Route("")]
+        [HttpGet]
+        public IHttpActionResult GetAll()
+        {
+            ML.Aseguradora aseguradora = new ML.Aseguradora();
+            ML.Result result = BL.Aseguradora.GetAllEF();
+            if (result.Correct)
+            {
+                return Content(HttpStatusCode.OK, result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
+
+        [Route("{idAseguradora}")]
+        [HttpGet]
+        public IHttpActionResult GetById(int idAseguradora)
+        {
+            ML.Aseguradora aseguradora = new ML.Aseguradora();
+            aseguradora.IdAseguradora = idAseguradora;
+            ML.Result result = BL.Aseguradora.GetByIdEF(aseguradora.IdAseguradora);
             if (result.Correct)
             {
                 return Content(HttpStatusCode.OK, result);

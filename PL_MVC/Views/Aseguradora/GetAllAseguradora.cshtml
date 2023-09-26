@@ -37,7 +37,7 @@
                     <td class="text-center align-middle">@aseguradora.FechaCreacion</td>
                     <td class="text-center align-middle">@aseguradora.FechaModificacion</td>
                     <td class="text-center align-middle">@aseguradora.Usuario.Nombre @aseguradora.Usuario.ApellidoPaterno</td>
-                    <td><a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar a esta compañia?')" href="@Url.Action("Delete", "Aseguradora", new {IdAseguradora = aseguradora.IdAseguradora})"><i class="fa-solid fa-user-xmark" style="color: #111722;"></i></a></td>
+                    <td><a class="btn btn-danger" onclick="return confirm('Estas seguro de eliminar a esta compañia?')" href="@Url.Action("Delete", "Aseguradora", new {idAseguradora = aseguradora.IdAseguradora})"><i class="fa-solid fa-user-xmark" style="color: #111722;"></i></a></td>
                 </tr>
             }
         </tbody>
