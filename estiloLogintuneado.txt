@@ -1,0 +1,130 @@
+body {
+    background-image: url("/Content/Images/thumb2-dark-blue-line-background-blue-neon-lines-abstract-blue-background-creative-background-wave-lines-background.png");
+    /*background: repeating-linear-gradient(darkblue,lime);*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    /*border:1px solid white;*/
+    width: 700px;
+    height: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+}
+
+.backbox {
+    background: rgb(20,20,36);
+    background: linear-gradient(90deg, rgba(20,20,36,1) 0%, rgba(20,20,36,1) 35%, rgba(1,28,33,1) 100%);
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    transform: translate(0,-50%);
+    top: 50%;
+    display: inline-flex;
+}
+
+.frontbox {
+    background: rgb(19,19,230);
+    background: linear-gradient(90deg, rgba(19,19,230,1) 0%, rgba(10,10,189,1) 35%, rgba(1,28,33,1) 100%);
+    border-radius: 20px;
+    height: 100%;
+    width: 50%;
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    margin-right: 3%;
+    margin-left: 3%;
+    transition: right .8s ease-in-out;
+}
+
+.moving {
+    right: 45%;
+}
+
+.loginMsg, .signupMsg {
+    width: 50%;
+    height: 100%;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+    .loginMsg .title,
+    .signupMsg .title {
+        font-weight: 300;
+        font-size: 23px;
+    }
+
+    .loginMsg p,
+    .signupMsg p {
+        font-weight: 100;
+    }
+
+.textcontent {
+    color: white;
+    margin-top: 65px;
+    margin-left: 12%;
+}
+
+.loginMsg a,
+.signupMsg a {
+    background-color: #404040;
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
+    font-size: 12px;
+    box-sizing: content-box;
+    font-weight: 300;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* front box content*/
+.login, .signup {
+    padding: 20px;
+    text-align: center;
+}
+
+    .login h2,
+    .signup h2 {
+        color: #35B729;
+        font-size: 22px;
+    }
+
+.inputbox {
+    margin-top: 30px;
+}
+
+.login input,
+.signup input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: #f2f2f2;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+.loggin 
+    #iniciosesion {
+    background-color: #0f5d07;
+    border: groove;
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+    box-sizing: content-box;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90px;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    cursor: pointer;
+}
+

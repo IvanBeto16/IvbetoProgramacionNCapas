@@ -1,0 +1,47 @@
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/Styles/LoginStyle.css"/>
+    <title>Login del Sistema</title>
+
+</head>
+<body background: linear-gradient(darkblue, lime)>
+    <h1 style="text-align: center; color: gold; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Sistema IABP</h1>
+    <hr />
+    <br />
+    <div class="container">
+        <div class="backbox">
+            <div class="loginMsg">
+                <div class="textcontent">
+                    <p class="title">No tienes una cuenta todavía?</p>
+                    <p>Registrate gratis para poder acceder.</p>
+                    <br />
+                    <a id="switch1" href="@Url.Action("Form", "Usuario")">Registarme</a>
+                </div>
+            </div>
+        </div>
+        <!-- backbox -->
+        @using (Html.BeginForm("Login", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="frontbox">
+                <div class="login">
+                    <h2>Inicio de Sesión</h2>
+                    <div class="inputbox">
+                        @Html.Label("Correo Electrónico")
+                        @Html.TextBoxFor(model => Model.Email, new { @name = "email", @type = "text", @placeholder = "EMAIL" })
+                        @Html.Label("Password")
+                        @Html.TextBoxFor(model => Model.Password, new { @name = "password", @type = "password", @placeholder = "PASSWORD" })
+                    </div>
+                    <span>FORGET PASSWORD?</span>
+                    <button style="background-color: #0f5d07; 
+                        border: groove; color: white; font-size: 12px; font-weight: 300; box-sizing: content-box; 
+                        padding: 10px; border-radius: 20px; width: 90px; position: absolute; right: 30px; bottom: 30px; 
+                        cursor: pointer;" type="submit" id="iniciosesion">Iniciar Sesión</button>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+
+</body>

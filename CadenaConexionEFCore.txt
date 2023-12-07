@@ -1,0 +1,16 @@
+Scaffold-DbContext "Server=LAPTOP-FMASAI54; Database= IvbetoNetCore;TrustServerCertificate=True;
+Trusted_Connection=True; User ID=sa; Password=pass@word1;" Microsoft.EntityFrameworkCore.SqlServer
+
+
+Scaffold-DbContext "Server=LAPTOP-FMASAI54; Database= IvbetoCine;TrustServerCertificate=True;
+Trusted_Connection=True; User ID=sa; Password=pass@word1;" Microsoft.EntityFrameworkCore.SqlServer
+
+Scaffold-DbContext "Server=LAPTOP-FMASAI54; Database= IvBetoExamenBlazor;TrustServerCertificate=True;
+Trusted_Connection=True; User ID=sa; Password=pass@word1;" Microsoft.EntityFrameworkCore.SqlServer
+
+
+Welcome01$#$
+
+Dentro del productoscontroller, crear un nuevo metodo y vista para el Carrito
+SetString() --> Crear sessiones en .NET Core
+GetString() --> Recuperar sessiones en .NET Core

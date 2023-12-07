@@ -1,0 +1,43 @@
+[OperationContract]
+public SLWCF.Result Add(ML.Aseguradora aseguradora)
+[OperationContract]
+public SLWCF.Result Update(ML.Aseguradora aseguradora)
+[OperationContract]
+public SLWCF.Result Delete(int idAseguradora)
+
+
+
+
+
+public SLWCF.Result Add(ML.Aseguradora aseguradora)
+{
+    ML.Result result = BL.Aseguradora.AddEF(aseguradora);
+    return new SLWCF.Result
+    {
+        Correct = result.Correct,
+        ErrorMessage = result.ErrorMessage,
+        Ex = result.Ex
+    };
+}
+
+public SLWCF.Result Update(ML.Aseguradora aseguradora)
+{
+    ML.Result result = BL.Aseguradora.UpdateEF(aseguradora);
+    return new SLWCF.Result
+    {
+        Correct = result.Correct,
+        ErrorMessage = result.ErrorMessage,
+        Ex = result.Ex
+    };
+}
+
+public SLWCF.Result Delete(int idAseguradora)
+{
+    ML.Result result = BL.Aseguradora.DeleteEF(idAseguradora);
+    return new SLWCF.Result
+    {
+        Correct = result.Correct,
+        ErrorMessage = result.ErrorMessage,
+        Ex = result.Ex
+    };
+}

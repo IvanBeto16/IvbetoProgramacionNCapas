@@ -1,0 +1,72 @@
+            async function initMap() {
+                // The location of Uluru
+                var position = { lat: 19.34145, lng: -99.13281 };
+                // Request needed libraries.
+                const { Map } = await google.maps.importLibrary("maps");
+                const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+                // The map, centered at Uluru
+                map = new Map(document.getElementById("map"), {
+                    zoom: 11,
+                    center: position,
+                    mapId: "DEMO_MAP_ID",
+                });
+
+
+                // The marker, positioned at Uluru
+                const marker = new google.maps.Marker({
+                    map: map,
+                    position: position,
+                    title: "mylatLng",
+                    draggable: true,
+                });
+
+                let infoWindow = new google.maps.InfoWindow({
+                    content: "Haga click en mapa",
+                    position: position
+                });
+                //Adding a new marker on the map
+                // function addMarker(location, map, marca) {
+                //     const marker = new google.maps.Marker({
+                //         position: location,
+                //         map: map,
+                //     })
+                // }
+
+                //Para el caso donde ya tenemos direccion (Update)
+                var textDireccion = document.getElementById("txtDireccion").value;
+                var longitud;
+                var latitud;
+
+                infoWindow.open(map);
+                //Listener del evento de google maps, para que haga cosas cuando un click en el mapa
+                google.maps.event.addListener(map, 'click', function (event) {
+                    var latLng = event.latLng;
+                    var geocoder = new google.maps.Geocoder()
+                    if (textDireccion != "" || textDireccion != null) {
+                        geocoder.geocode({ "address": textDireccion }, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                market.setMap(null);
+                                latitud = results[0].geometry.location.lat();
+                                longitud = results[0].geometry.location.lng();
+
+                                console.log(textDireccion);
+                                position = { lat: latitud, lng: longitud };
+                                marker.setPosition(position);
+                                $("#txtDireccion").val(results[0].formatted_address);
+                                map.panTo(position);
+                            }
+                        });
+                    } else {
+                        latLng = event.latLng;
+                        marker.setPosition(latLng);
+                        geocoder.geocode({ 'latLng': event.latLng }, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                $("#txtDireccion").val(results[0].formatted_address);
+                            }
+                        });
+                    }
+
+
+                });
+            }

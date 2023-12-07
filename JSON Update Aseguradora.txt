@@ -1,0 +1,9 @@
+JSON Update Aseguradora
+
+{
+    "IdAseguradora" : 14,
+    "Nombre" : "Balkin Seguros",
+    "Usuario" : {
+        "IdUsuario" : 24
+    }
+}

@@ -1,0 +1,12 @@
+Linea que manda al form para agregar un nuevo usuario
+<a id="switch1" href="@Url.Action("Form", "Usuario")">Registarme</a>
+
+Linea para asegurar que se manden datos del form de login al controlador de login 
+@using (Html.BeginForm("Login", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+Helpers para recibir los datos del correo y la contraseña
+@Html.Label("Correo Electrónico")
+@Html.TextBoxFor(model => Model.Email, new { @name = "email", @type = "text", @placeholder = "EMAIL" })
+@Html.Label("Password")
+@Html.TextBoxFor(model => Model.Password, new { @name = "password", @type = "password", @placeholder = "PASSWORD" })

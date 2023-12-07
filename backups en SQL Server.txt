@@ -1,0 +1,20 @@
+backups en SQL Server
+----------------------------------------------------------------------------------------------
+Con un archivo .bak
+Sobre la base de datos donde queremos el backup, click derecho.
+Ir a Tasks > Backup >>Type: Full >> 0 dias (sin expiracion) y guardar la ruta del respaldo (precaucion)
+>> OK
+ 
+
+Como restaurar un .bak
+Click derecho en Databases (SQL SERVER)
+Click en Restore Database >> click en opcion Device y en "..." >> click en Agregar 
+
+.bak solo funciona para las mismas versiones de SQL Server, no funciona en otras versiones
+---------------------------------------------------------------------------------------
+A traves de un script
+
+Click derecho sobre la base de datos a restaurar
+Ir a Tasks>> Generate Script>> Full Join >> Advanced>> Bajar todas las opciones y buscar "Types of Data to Script" y seleccionar Schema and Data>> Next >>(Summary)Next>> 
+
+En el script, se debe quitar dede las Sentencias ON PRIMARY hasta GO (GO No se elimina)

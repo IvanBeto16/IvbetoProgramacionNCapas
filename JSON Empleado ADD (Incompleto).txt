@@ -1,0 +1,19 @@
+JSON Empleado ADD (Completo)
+
+
+{
+    "NumeroEmpleado" : "9",
+    "RFC" : "ROER970810Y7F",
+    "Nombre" : "Renata",
+    "ApellidoPaterno" : "Rodrigguez",
+    "ApellidoMaterno" : "Escalante",
+    "Email" : "renrizeoficial@gmail.com",
+    "Telefono" : "5584736270",
+    "FechaNacimiento" : "1997-08-10T12:00:00.2012439-06:00",
+    "NSS" : "8574583949201816",
+    "Foto" : null,
+    "Empresa" : {
+        "IdEmpresa" : 6
+    },
+    "filasInsertadas" : null
+}

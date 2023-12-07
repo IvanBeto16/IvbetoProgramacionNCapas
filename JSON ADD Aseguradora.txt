@@ -1,0 +1,10 @@
+JSON ADD Aseguradora
+
+{
+    "Nombre" : "Mexican Secures",
+    "FechaCreacion" : "1957-06-18T12:00:00.2012439-06:00",
+    "Usuario" : {
+        "IdUsuario" : "22"
+    },
+    "filasInsertadas" : null
+}

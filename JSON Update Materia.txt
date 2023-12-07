@@ -1,0 +1,7 @@
+JSON Update Materia
+
+{
+    "idMateria" : 2,
+    "Nombre" : "Matematicas Avanzadas",
+    "Costo" : "87.99"
+}
